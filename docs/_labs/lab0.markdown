@@ -125,7 +125,7 @@ In preperation for further labs we need to install the F5 Automation Toolchain a
 
 2. Install ATC on BIG-IP1 and BIG-IP2:
 
-    The client machine has the F5-CLI docker container installed.  We will use this container to install and interact with the 
+    The client machine has the F5-CLI docker container installed.  We will use this container to install and interact with the ATC services
 
     > **Note**: If the F5-CLI Docker container is not running, start it with the 'docker start f5-cli' command
     

@@ -32,17 +32,17 @@ leverage the following components and tools:
 ## Deploy Our First Application
 Ensure you have the latest version of the lab from GitHub then open the lab3 folder:
 
-  ```bash
-  cd ~/projects/UDF-DevOps-Base
-  git pull
-  cd labs/lab3
-  ```
+```bash
+cd ~/projects/UDF-DevOps-Base
+git pull
+cd labs/lab3
+```
 
 Ensure FAST is running and read:
 
-  ```bash
-  curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/info | jq
-  ```
+```bash
+curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/info | jq
+```
 
 ## Exploring FAST templates
 
@@ -90,20 +90,19 @@ In this lab, we will take a look at the HTTP templates.
 
 2. Post the payload:
 
-  ```bash
-  # replace with your BIG-IP password
-  export bigip_pwd=enteryourpassword
-
-  fast_task_id=$(curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/applications -X POST --header "Content-Type: application/json" -d "@lab3a.json" | jq '.message[0].id' -r)
-  ```
+  > **Note**: Update BIG-IP password with (if needed) -> `export bigip_pwd=enteryourpassword`
+  
+```bash
+fast_task_id=$(curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/applications -X POST --header "Content-Type: application/json" -d "@lab3a.json" | jq '.message[0].id' -r)
+```
 
 3. Check the response:
 
-  ```bash
-  curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/tasks/$fast_task_id
-  ```
+```bash
+curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/tasks/$fast_task_id
+```
 
-    You should see a 200 response if everything was successful.
+  > **Note**: Look for a 200 response that everything was successful.
 
 Congratulations, you have now deployed your first FAST application!! 
 
@@ -144,15 +143,15 @@ In this exercise, we will deploy our second application on port 8080.
 
 2. Post the payload:
 
-  ```bash
-  fast_task_id=$(curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/applications -X POST --header "Content-Type: application/json" -d "@lab3b.json" | jq '.message[0].id' -r)
+```bash
+fast_task_id=$(curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/applications -X POST --header "Content-Type: application/json" -d "@lab3b.json" | jq '.message[0].id' -r)
 ```
 
 3. Check the response:
 
-  ```bash
-  curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/tasks/$fast_task_id
-  ```
+```bash
+curl -sku admin:$bigip_pwd  https://10.1.1.6/mgmt/shared/fast/tasks/$fast_task_id
+```
 
 ## Testing
 

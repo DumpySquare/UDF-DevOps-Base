@@ -33,13 +33,13 @@ leverage the following components and tools:
 ## Setup
 
 1. Ensure you have the latest version of the code from GitHub
-    ```bash
-    cd ~/projects/UDF-DevOps-Base
-    git remote add upstream https://github.com/f5devcentral/UDF-DevOps-Base.git
-    git fetch upstream
-    git merge upstream/main
-    cd labs/lab1
-    ```
+```bash
+cd ~/projects/UDF-DevOps-Base
+git remote add upstream https://github.com/f5devcentral/UDF-DevOps-Base.git
+git fetch upstream
+git merge upstream/main
+cd labs/lab1
+```
 
 2. Set the BIG-IP password as an environment variable:
 
@@ -64,18 +64,18 @@ leverage the following components and tools:
 
 
     execute the following command in your terminal:
-    ```bash
-    docker exec -it f5-cli f5 login --authentication-provider bigip --host 10.1.1.6 --user admin --password $bigip_pwd
-    ```
+```bash
+docker exec -it f5-cli f5 login --authentication-provider bigip --host 10.1.1.6 --user admin --password $bigip_pwd
+```
     
     You should see a message stating _"Logged in successfully"_
 
 4. Verify the Application Service 3 Extension is installed
 
     This command also leverages the Docker exec feature, but we are now telling the F5 CLI to target a BIG-IP, obtain the version of AS3 installed and that AS3 is ready:
-    ```bash
-    docker exec -it f5-cli f5 bigip extension as3 verify
-    ```
+```bash
+docker exec -it f5-cli f5 bigip extension as3 verify
+```
 
     We are looking for version 3.19.1 or higher in the response.
 
@@ -87,13 +87,16 @@ leverage the following components and tools:
     * What port will the BIG-IP Virtual Server use?
     * What port will the pool members listen on?
 
+    > **Note**:  this can be access via the vscode-terminal at:  ~/projects/UDF-DevOps-Base/labs/lab1/http.as3.json
 
 6. Issue AS3 Declaration
 
-    The final step is to send the _http.as3.json_ AS3 declaration to the BIG-IP.  Again, this command leverages the Docker exec feature, but we are now telling the F5 CLI to create an AS3 application on the BIG-IP and to use the declaration located at _/f5-cli/projects/UDF-DevOps-Base/labs/lab1/http.as3.json_.  For more information, please reference the [F5-CLI documentation](https://clouddocs.f5.com/sdk/f5-cli/).
-    ```bash
-    docker exec -it f5-cli f5 bigip extension as3 create --declaration /f5-cli/projects/UDF-DevOps-Base/labs/lab1/http.as3.json
-    ```
+    The final step is to send the _http.as3.json_ AS3 declaration to the BIG-IP.  This command leverages the Docker exec feature, but now utilizing the F5 CLI within the container to create an AS3 application on the BIG-IP and to use the declaration we just examined above.  For more information, please reference the [F5-CLI documentation](https://clouddocs.f5.com/sdk/f5-cli/).
+
+```bash
+docker exec -it f5-cli f5 bigip extension as3 create --declaration /f5-cli/projects/UDF-DevOps-Base/labs/lab1/http.as3.json
+```
+    > **Note**:  The above command executes a command in a docker container, accessing the file through a docker mount (/home/ubuntu:/f5-cli), so the path will be slightly different than when we looked at the file within VSCode.
 
     You should receive a result code of 200.
 
@@ -115,8 +118,8 @@ are still itching to check it in the browser... so we have included
 a containerized version of Firefox to view applications inside our
 test environment.
 
-1. In the UDF Components list, Click the Access drop-down on the Client System
-2. Click FIREFOX
+1. In the UDF Components list, Click the `Access` drop-down on the `client` System
+2. Click `FIREFOX`
 3. In the Firefox browser, enter http://10.1.20.10 in the address bar
 
 You should now see the NGINX demo application.
